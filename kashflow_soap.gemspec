@@ -6,5 +6,5 @@ Gem::Specification.new do |s|
   s.summary = "A Savon wrapper for the KashFlow accounting software API"
   s.email = "ed.clements@gmail.com"
   s.files = ["lib/kashflow_soap.rb"]
-  s.licence = 'MIT'
+  s.license = 'MIT'
 end
