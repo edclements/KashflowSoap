@@ -1,3 +1,5 @@
+require "exceptions.rb"
+
 class KashflowSoap
 
   def initialize username, password, options
@@ -26,7 +28,12 @@ class KashflowSoap
     response = response.body["#{m}_response".to_sym]
     result = response["#{m}_result".to_sym]
     status = response[:status]
-    result if status != "NO"
+
+    if status == "NO"
+      raise KashflowAuthenticationError
+    else 
+      result 
+    end
   end
 
   def insert_customer customer
@@ -41,17 +48,27 @@ class KashflowSoap
     call :get_customer_by_id, {CustomerID: id.to_s}
   end
 
+  def get_nominal_codes
+    call :get_nominal_codes
+  end
+
   def insert_invoice invoice
     result = call :insert_invoice, {Inv: invoice}
     if result
       invoice[:InvoiceNumber] = result
       invoice
+    else
+      raise KashflowAuthenticationError
     end
   end
 
   def get_invoice id
     invoice = call :get_invoice, {InvoiceNumber: id.to_s}
-    invoice if invoice[:invoice_dbid] != "0"
+    if invoice && invoice[:invoice_dbid] != "0"
+      invoice 
+    else 
+      raise StandardError 
+    end
   end
 
   def get_inv_pay_methods
