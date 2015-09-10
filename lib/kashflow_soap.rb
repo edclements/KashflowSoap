@@ -28,8 +28,9 @@ class KashflowSoap
     response = response.body["#{m}_response".to_sym]
     result = response["#{m}_result".to_sym]
     status = response[:status]
+    status_detail = response[:status_detail]
 
-    if status == "NO"
+    if status == "NO" && status_detail == "Incorrect username or password"
       raise KashflowAuthenticationError
     else 
       result 
@@ -58,7 +59,7 @@ class KashflowSoap
       invoice[:InvoiceNumber] = result
       invoice
     else
-      raise KashflowAuthenticationError
+      raise StandardError
     end
   end
 
