@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'kashflow_soap'
-  s.version = '0.0.0'
+  s.version = '0.0.1'
   s.date = '2015-05-01'
   s.authors = ["Ed Clements"]
   s.summary = "A Savon wrapper for the KashFlow accounting software API"
