@@ -1,4 +1,3 @@
-require "exceptions.rb"
 
 class KashflowSoap
 
@@ -94,4 +93,5 @@ class KashflowSoap
     call m, message
   end
 
+  class KashflowAuthenticationError < StandardError; end
 end
