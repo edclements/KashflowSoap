@@ -1,1 +1,0 @@
-class KashflowAuthenticationError < StandardError; end
