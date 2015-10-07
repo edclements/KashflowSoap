@@ -31,8 +31,8 @@ class KashflowSoap
 
     if status == "NO" && status_detail == "Incorrect username or password"
       raise KashflowAuthenticationError
-    else 
-      result 
+    else
+      result
     end
   end
 
@@ -65,9 +65,9 @@ class KashflowSoap
   def get_invoice id
     invoice = call :get_invoice, {InvoiceNumber: id.to_s}
     if invoice && invoice[:invoice_dbid] != "0"
-      invoice 
-    else 
-      raise StandardError 
+      invoice
+    else
+      raise StandardError
     end
   end
 
@@ -92,6 +92,5 @@ class KashflowSoap
   def method_missing m, message = nil
     call m, message
   end
-
-  class KashflowAuthenticationError < StandardError; end
 end
+class KashflowAuthenticationError < StandardError; end
